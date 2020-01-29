@@ -12,7 +12,7 @@ type Props = {
      * The text to translate. This may be a string or JSX. The defaultMessage prop may be
      * given or the component may have children, but not both.
      */
-    children?: React.ReactNode,
+    children?: React.ReactNode;
 
     /**
      * Specify the pivot count to choose which plural form to use.
@@ -21,39 +21,39 @@ type Props = {
      * and the linguistic rules of the locale which determine which numbers
      * belong to which plural class.
      */
-    count?: number,
+    count?: number;
 
     /**
      * The text to translate. This may be a string or JSX. This prop may be
      * given or the component may have children, but not both.
      */
-    defaultMessage?: React.ElementType | string,
+    defaultMessage?: React.ElementType | string;
 
     /**
      * A description to send to the translators to explain the context of
      * this string.
      */
-    description: string,
+    description: string;
 
     /** The unique id of this string. */
-    id: string,
+    id: string;
 
     /**
      * The intl provider. This is injected into this component
      * via the injectIntl function from react-intl.
      */
-    intl: Object,
+    intl: Record<string, any>;
 
     /**
      * Specify the name of the HTML tag you would like to use to wrap the
      * translations.
      */
-    tagName: string,
+    tagName: string;
 };
 
 type State = {
-    composition: Composition,
-    source: string,
+    composition: Composition;
+    source: string;
 };
 
 /**

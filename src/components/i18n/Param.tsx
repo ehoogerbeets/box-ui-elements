@@ -12,10 +12,10 @@ import {
 
 type Props = {
     /** The value of this parameter */
-    description: string,
+    description: string;
 
     /** A description of this parameter to help the translators understand what it is */
-    value: any,
+    value: any;
 };
 
 /**
