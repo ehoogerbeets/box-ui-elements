@@ -31,7 +31,7 @@ type Props = {
         | '=18'
         | '=19',
 
-    children: React.Node,
+    children: React.ReactNode,
 };
 
 /**

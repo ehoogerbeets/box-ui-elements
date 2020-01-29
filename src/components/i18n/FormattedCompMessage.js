@@ -12,7 +12,7 @@ type Props = {
      * The text to translate. This may be a string or JSX. The defaultMessage prop may be
      * given or the component may have children, but not both.
      */
-    children?: React.Node,
+    children?: React.ReactNode,
 
     /**
      * Specify the pivot count to choose which plural form to use.
