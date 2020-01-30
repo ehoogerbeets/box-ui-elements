@@ -66,10 +66,6 @@ type State = {
  * extract your strings into a message.js file.
  */
 class FormattedCompMessage extends React.Component<Props, State> {
-    composition: Composition;
-
-    str: string;
-
     static defaultProps = {
         tagName: 'span',
     };
@@ -83,6 +79,10 @@ class FormattedCompMessage extends React.Component<Props, State> {
             defaultMessage, // The English string + HTML + components that you want translated
             count, // the pivot count to choose a plural form
             children, // the components within the body
+        }: {
+            defaultMessage: string;
+            count: number;
+            children: React.ReactElement[];
         } = this.props;
 
         const sourceElements = defaultMessage || children;
@@ -115,9 +115,9 @@ class FormattedCompMessage extends React.Component<Props, State> {
      * @param {React.Element} children the children of this node
      * @return {string} the composed plural string
      */
-    composePluralString(children) {
+    composePluralString(children: React.ReactElement[]) {
         const categories = {};
-        React.Children.forEach(children, child => {
+        React.Children.forEach(children, (child: React.ReactElement) => {
             if (typeof child === 'object' && React.isValidElement(child) && child.type.name === 'Plural') {
                 const childComposition = new Composition(child.props.children);
                 categories[child.props.category] = childComposition.compose();
@@ -142,7 +142,7 @@ class FormattedCompMessage extends React.Component<Props, State> {
             CATEGORY_MANY,
             CATEGORY_OTHER,
         ]
-            .map(category => (categories[category] ? ` ${category} {${categories[category]}}` : ''))
+            .map((category: string) => (categories[category] ? ` ${category} {${categories[category]}}` : ''))
             .join('');
 
         // see the intl-messageformat project for an explanation of this syntax
@@ -150,8 +150,29 @@ class FormattedCompMessage extends React.Component<Props, State> {
     }
 
     render() {
-        const { count, tagName, intl, description, id, defaultMessage, ...rest } = this.props;
-        const { composition, source } = this.state;
+        const {
+            count,
+            tagName,
+            intl,
+            description,
+            id,
+            defaultMessage,
+            ...rest
+        }: {
+            count: number;
+            tagName: string | React.ReactElement;
+            intl: any;
+            description: string;
+            id: string;
+            defaultMessage: string;
+        } = this.props;
+        const {
+            composition,
+            source,
+        }: {
+            composition: Composition;
+            source: string;
+        } = this.state;
         const values = {};
         if (typeof count === 'number') {
             // make sure intl.formatMessage switches properly on the count
