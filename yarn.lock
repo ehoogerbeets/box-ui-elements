@@ -3089,6 +3089,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@box/cldr-data@^34.0.0":
+  version "34.0.0"
+  resolved "https://box.jfrog.io/box/api/npm/boxnpm/@box/cldr-data/-/cldr-data-34.0.0.tgz#bae9b3a7200b7692afa2ad02f7fd6f0ec6bc20c7"
+  integrity sha1-uumzpyALdpKvoq0C9/1vDsa8IMc=
+
 "@box/frontend@^6.0.2":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@box/frontend/-/frontend-6.0.2.tgz#0e2c74c69f7b35635a9cf8c9b4dc522a49379ff3"

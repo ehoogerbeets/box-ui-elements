@@ -121,6 +121,9 @@
         "node": ">=10.x",
         "yarn": ">=1.10.0"
     },
+    "dependencies": {
+        "@box/cldr-data": "^34.0.0"
+    },
     "devDependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.4",
