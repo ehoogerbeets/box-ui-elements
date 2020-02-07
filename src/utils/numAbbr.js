@@ -1,6 +1,6 @@
 /**
  * @flow
- * @file Function to abbreviate a numberas a string in a locale-sensitive manner.
+ * @file Function to abbreviate a number as a string in a locale-sensitive manner.
  * @author Box
  */
 
@@ -10,9 +10,10 @@ import { languages, numbers } from 'box-locale-data';
 interface NumAbbrOptions {
     length: string;
     locale: string;
+    numbersData: object;
 }
 
-export function numAbbrWithLocale(localedata: object, num: number, locale: string, options?: NumAbbrOptions): string {
+function numAbbrWithLocale(numbersData: object, num: number, locale: string, options?: NumAbbrOptions): string {
     if (!num) return '0';
     let { length } = options || {};
     length = length || 'short';
@@ -20,7 +21,7 @@ export function numAbbrWithLocale(localedata: object, num: number, locale: strin
     if (num < 0) {
         exponent -= 1; // take care of the negative sign
     }
-    const formats = localedata[length];
+    const formats = numbersData[length];
     const digits: number = exponent >= formats.length ? exponent - formats.length + 3 : formats[exponent].digits;
     const count: number = Math.round(num / 10 ** (exponent - digits + 1));
     const template = new IntlMessageFormat(
@@ -32,15 +33,13 @@ export function numAbbrWithLocale(localedata: object, num: number, locale: strin
 
 /**
  * Gets the number in abbreviated form in a locale-sensitive manner. This function
- * scales the number down to the smallest it can be, taking only up to 3 significant
+ * scales the number down to the smallest it can be, taking only up to 4 significant
  * digits, and rounding the rest. ie. 12345678 becomes "12M" in English.
  *
- * The abbreviation words/letters can have the length "short" or "long". If "short",
+ * The abbreviation words/letters can have the length "short" or "long", specified
+ * with the "length" property in the options. If "short",
  * then this function uses an abbreviation of the bucket such as "12M". If "long",
  * then the name of the bucket is written out in full, such as "12 million".
- *
- * The locale can be given in the options, and when specified, the correct translation
- * of the bucket names are used. If not specified, the current locale is used.
  *
  * For locales that have complex plurals, such as Russian or Polish, this function
  * returns the correctly pluralized suffix/prefix to go along with the scaled number.
@@ -55,7 +54,9 @@ export default function(num: number, options?: NumAbbrOptions): string {
     if (!num) return '0';
 
     // languages contains info about the current locale
-    const locale = languages.bcp47Tag || 'en-US';
+    let { locale, numbersData } = options || {};
+    locale = locale || languages.bcp47Tag || 'en-US';
+    numbersData = numbersData || numbers;
 
     switch (typeof num) {
         case 'boolean':
@@ -70,7 +71,7 @@ export default function(num: number, options?: NumAbbrOptions): string {
         case 'object':
             return Array.isArray(num)
                 ? num.map(n => {
-                      return numAbbrWithLocale(numbers, n, locale, options);
+                      return numAbbrWithLocale(numbersData, n, locale, options);
                   })
                 : '0';
 
@@ -78,5 +79,5 @@ export default function(num: number, options?: NumAbbrOptions): string {
             break;
     }
 
-    return numAbbrWithLocale(numbers, num, locale, options);
+    return numAbbrWithLocale(numbersData, num, locale, options);
 }
