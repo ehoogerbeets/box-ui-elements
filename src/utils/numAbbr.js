@@ -5,15 +5,15 @@
  */
 
 import IntlMessageFormat from 'intl-messageformat';
-import { languages, numbers } from 'box-locale-data';
+import { languages, numbers } from 'box-locale-data'; // eslint-disable-line
 
 interface NumAbbrOptions {
     length: string;
     locale: string;
-    numbersData: object;
+    numbersData: any;
 }
 
-function numAbbrWithLocale(numbersData: object, num: number, locale: string, options?: NumAbbrOptions): string {
+function numAbbrWithLocale(numbersData: any, num: number, locale: string, options?: NumAbbrOptions): string {
     if (!num) return '0';
     let { length } = options || {};
     length = length || 'short';
