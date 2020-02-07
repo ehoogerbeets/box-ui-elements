@@ -3091,7 +3091,7 @@
 
 "@box/cldr-data@^34.0.0":
   version "34.0.0"
-  resolved "https://box.jfrog.io/box/api/npm/boxnpm/@box/cldr-data/-/cldr-data-34.0.0.tgz#bae9b3a7200b7692afa2ad02f7fd6f0ec6bc20c7"
+  resolved "https://registry.yarnpkg.com/@box/cldr-data/-/cldr-data-34.0.0.tgz#bae9b3a7200b7692afa2ad02f7fd6f0ec6bc20c7"
   integrity sha1-uumzpyALdpKvoq0C9/1vDsa8IMc=
 
 "@box/frontend@^6.0.2":
