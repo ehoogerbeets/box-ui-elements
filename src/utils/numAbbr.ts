@@ -1,5 +1,4 @@
 /**
- * @flow
  * @file Function to abbreviate a number as a string in a locale-sensitive manner.
  * @author Box
  */
