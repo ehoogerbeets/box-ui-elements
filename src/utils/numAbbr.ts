@@ -53,12 +53,6 @@ function numAbbrWithLocale(num: number, options: NumAbbrOptions, numbersData?: N
  *
  * For locales that have complex plurals, such as Russian or Polish, this function
  * returns the correctly pluralized suffix/prefix to go along with the scaled number.
- *
- * @param {*} num the number or numbers to abbreviate. (also accepts numbers in string form,
- * or an array of numbers).
- * @param {NumAbbrOptions=} options options governing how the output is generated
- * @return {string} the number in abbreviated form as a string, or '0' if there was
- * invalid input such as null instead of a number
  */
 function numAbbr(num: unknown, options: NumAbbrOptions = { length: Lengths.short }): string | string[] {
     if (!num) return '0';
