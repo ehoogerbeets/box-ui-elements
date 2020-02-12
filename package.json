@@ -121,9 +121,6 @@
         "node": ">=10.x",
         "yarn": ">=1.10.0"
     },
-    "dependencies": {
-        "@box/cldr-data": "^34.0.0"
-    },
     "devDependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.4",
@@ -312,6 +309,7 @@
         "@hapi/address": ">=2.0.0 <2.1.2",
         "axios": "^0.18.1",
         "classnames": "^2.2.5",
+        "@box/cldr-data": "^34.0.0",
         "color": "^3.1.2",
         "draft-js": "^0.10.1",
         "filesize": "^4.1.2",
