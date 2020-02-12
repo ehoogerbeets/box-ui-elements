@@ -4,18 +4,29 @@
  */
 
 import IntlMessageFormat from 'intl-messageformat';
-import { languages, numbers } from 'box-locale-data'; // eslint-disable-line
+import data from 'box-locale-data';
 
-interface NumAbbrOptions {
-    length: string;
-    locale: string;
-    numbersData: any;
+import isNaN from 'lodash/isNaN';
+
+const { languages, numbers } = data;
+
+export enum Lengths {
+    short = 'short',
+    long = 'long',
 }
 
-function numAbbrWithLocale(numbersData: any, num: number, locale: string, options?: NumAbbrOptions): string {
-    if (!num) return '0';
-    let { length } = options || {};
-    length = length || 'short';
+export interface NumAbbrOptions {
+    length?: Lengths;
+    locale?: string;
+    numbersData?: NumbersData;
+}
+
+function numAbbrWithLocale(num: number, options: NumAbbrOptions, numbersData?: NumbersData, locale?: string): string {
+    if (!num || !numbersData) {
+        return '0';
+    }
+    let { length }: { length?: Lengths } = options;
+    length = length || Lengths.short;
     let exponent: number = Math.floor(num).toString().length - 1;
     if (num < 0) {
         exponent -= 1; // take care of the negative sign
@@ -49,13 +60,14 @@ function numAbbrWithLocale(numbersData: any, num: number, locale: string, option
  * @return {string} the number in abbreviated form as a string, or '0' if there was
  * invalid input such as null instead of a number
  */
-export default function(num: number, options?: NumAbbrOptions): string {
+function numAbbr(num: unknown, options: NumAbbrOptions = { length: Lengths.short }): string | string[] {
     if (!num) return '0';
 
     // languages contains info about the current locale
-    let { locale, numbersData } = options || {};
-    locale = locale || languages.bcp47Tag || 'en-US';
-    numbersData = numbersData || numbers;
+    const { locale, numbersData } = options;
+    const loc = locale || languages.bcp47Tag || 'en-US';
+    const numData: NumbersData = numbersData || numbers;
+    let value;
 
     switch (typeof num) {
         case 'boolean':
@@ -63,14 +75,16 @@ export default function(num: number, options?: NumAbbrOptions): string {
             break;
 
         case 'string':
-            num = parseInt(num, 10);
-            if (Number.isNaN(num)) return '0';
+            value = parseInt(num, 10);
+            if (isNaN(value)) {
+                return '0';
+            }
             break;
 
         case 'object':
             return Array.isArray(num)
                 ? num.map(n => {
-                      return numAbbrWithLocale(numbersData, n, locale, options);
+                      return numAbbrWithLocale(n, options, numData, loc);
                   })
                 : '0';
 
@@ -78,5 +92,7 @@ export default function(num: number, options?: NumAbbrOptions): string {
             break;
     }
 
-    return numAbbrWithLocale(numbersData, num, locale, options);
+    return numAbbrWithLocale(num as number, options, numData, loc);
 }
+
+export default numAbbr;
