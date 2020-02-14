@@ -306,7 +306,7 @@
         "yargs": "^15.1.0"
     },
     "peerDependencies": {
-        "@box/cldr-data": "34.2.0",
+        "@box/cldr-data": "^34.2.0",
         "@hapi/address": ">=2.0.0 <2.1.2",
         "axios": "^0.18.1",
         "classnames": "^2.2.5",
