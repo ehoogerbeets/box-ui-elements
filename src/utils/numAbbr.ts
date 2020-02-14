@@ -4,7 +4,7 @@
  */
 
 import IntlMessageFormat from 'intl-messageformat';
-import data from 'box-locale-data';
+import data, { NumbersData } from 'box-locale-data';
 
 import isNaN from 'lodash/isNaN';
 
