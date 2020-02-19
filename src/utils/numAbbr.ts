@@ -74,9 +74,12 @@ function numAbbr(input: unknown, options: NumAbbrOptions = { length: Lengths.sho
             break;
 
         case 'object':
+            // for an array, we format each element of that array. In order to do that safely,
+            // recursively call numAbbr to make sure each of the elements is converted to a
+            // number before we call numAbbrWithLocale
             return Array.isArray(input)
-                ? input.map(n => {
-                      return numAbbrWithLocale(n, options, numbersData, locale);
+                ? input.map((element: unknown) => {
+                      return numAbbr(element, options) as string;
                   })
                 : '0';
 
