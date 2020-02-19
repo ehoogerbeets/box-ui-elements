@@ -21,19 +21,19 @@ export interface NumAbbrOptions {
     numbersData?: NumbersData;
 }
 
-function numAbbrWithLocale(num: number, options: NumAbbrOptions, numbersData?: NumbersData, locale?: string): string {
-    if (!num || !numbersData) {
+function numAbbrWithLocale(input: number, options: NumAbbrOptions, numbersData?: NumbersData, locale?: string): string {
+    if (!input || !numbersData) {
         return '0';
     }
     let { length }: { length?: Lengths } = options;
     length = length || Lengths.short;
-    let exponent: number = Math.floor(num).toString().length - 1;
-    if (num < 0) {
+    let exponent: number = Math.floor(input).toString().length - 1;
+    if (input < 0) {
         exponent -= 1; // take care of the negative sign
     }
     const formats = numbersData[length];
     const digits: number = exponent >= formats.length ? exponent - formats.length + 3 : formats[exponent].digits;
-    const count: number = Math.round(num / 10 ** (exponent - digits + 1));
+    const count: number = Math.round(input / 10 ** (exponent - digits + 1));
     const template = new IntlMessageFormat(
         formats[exponent > formats.length ? formats.length - 1 : exponent].msg,
         locale,
@@ -54,31 +54,29 @@ function numAbbrWithLocale(num: number, options: NumAbbrOptions, numbersData?: N
  * For locales that have complex plurals, such as Russian or Polish, this function
  * returns the correctly pluralized suffix/prefix to go along with the scaled number.
  */
-function numAbbr(num: unknown, options: NumAbbrOptions = { length: Lengths.short }): string | string[] {
-    if (!num) return '0';
+function numAbbr(input: unknown, options: NumAbbrOptions = { length: Lengths.short }): string | string[] {
+    if (!input) return '0';
 
     // languages contains info about the current locale
-    const { locale, numbersData } = options;
-    const loc = locale || languages.bcp47Tag || 'en-US';
-    const numData: NumbersData = numbersData || numbers;
+    const { locale = languages.bcp47Tag || 'en-US', numbersData = numbers }: NumAbbrOptions = options;
     let value;
 
-    switch (typeof num) {
+    switch (typeof input) {
         case 'boolean':
-            num = num ? 1 : 0;
+            input = input ? 1 : 0;
             break;
 
         case 'string':
-            value = parseInt(num, 10);
+            value = parseInt(input, 10);
             if (isNaN(value)) {
                 return '0';
             }
             break;
 
         case 'object':
-            return Array.isArray(num)
-                ? num.map(n => {
-                      return numAbbrWithLocale(n, options, numData, loc);
+            return Array.isArray(input)
+                ? input.map(n => {
+                      return numAbbrWithLocale(n, options, numbersData, locale);
                   })
                 : '0';
 
@@ -86,7 +84,7 @@ function numAbbr(num: unknown, options: NumAbbrOptions = { length: Lengths.short
             break;
     }
 
-    return numAbbrWithLocale(num as number, options, numData, loc);
+    return numAbbrWithLocale(input as number, options, numbersData, locale);
 }
 
 export default numAbbr;
