@@ -3091,8 +3091,8 @@
 
 "@box/cldr-data@^34.2.0":
   version "34.2.0"
-  resolved "https://registry.npmjs.org/@box/cldr-data/-/cldr-data-34.2.0.tgz#d2a50e778d28988faaf5e56194b17b46c6b98ae5"
-  integrity sha512-9UhSJpxJKWR2yDAmBjcrU7TkjWQwFB/GRjO5Lt4/IPD68qVsPBGeBK5dAQr64HHqX6KO3cY+KB6TyMC/hIlw9w==
+  resolved "https://registry.yarnpkg.com/@box/cldr-data/-/cldr-data-34.2.0.tgz#d2a50e778d28988faaf5e56194b17b46c6b98ae5"
+  integrity sha1-0qUOd40omI+q9eVhlLF7Rsa5iuU=
 
 "@box/frontend@^6.0.2":
   version "6.0.2"

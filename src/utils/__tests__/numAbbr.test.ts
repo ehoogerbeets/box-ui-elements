@@ -3,9 +3,9 @@
  * we can use it for unit testing
  */
 
-import germanLocaleData from '../../cldr-data/de-DE';
-import russianLocaleData from '../../cldr-data/ru-RU';
-import japaneseLocaleData from '../../cldr-data/ja-JP';
+import germanLocaleData from '@box/cldr-data/locale-data/de-DE';
+import russianLocaleData from '@box/cldr-data/locale-data/ru-RU';
+import japaneseLocaleData from '@box/cldr-data/locale-data/ja-JP';
 
 import numAbbr, { Lengths } from '../numAbbr';
 
