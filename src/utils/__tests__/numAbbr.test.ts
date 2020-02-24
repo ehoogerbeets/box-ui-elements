@@ -9,6 +9,9 @@ import japaneseLocaleData from '@box/cldr-data/locale-data/ja-JP';
 
 import numAbbr, { Lengths } from '../numAbbr';
 
+// make sure the number formatters work in different locales within these unit tests
+jest.unmock('react-intl');
+
 const germanNumbersData = germanLocaleData.numbers;
 const russianNumbersData = russianLocaleData.numbers;
 const japaneseNumbersData = japaneseLocaleData.numbers;
