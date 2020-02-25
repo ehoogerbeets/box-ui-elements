@@ -11,6 +11,7 @@ import numAbbr, { Lengths } from '../numAbbr';
 
 // make sure the number formatters work in different locales within these unit tests
 jest.unmock('react-intl');
+jest.unmock('intl-messageformat');
 
 const germanNumbersData = germanLocaleData.numbers;
 const russianNumbersData = russianLocaleData.numbers;
