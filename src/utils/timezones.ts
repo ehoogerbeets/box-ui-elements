@@ -26,7 +26,7 @@ function timezones(options: TimeZoneOptions = {}): TimeZoneEntries {
     }
 
     tzData.forEach(zone => {
-        zones[String(zone.boxId)] = zone;
+        zones[String(zone.id)] = zone;
     });
 
     return zones;
