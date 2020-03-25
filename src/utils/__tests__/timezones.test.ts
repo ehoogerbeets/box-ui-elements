@@ -6,15 +6,15 @@
 import germanLocaleData from '@box/cldr-data/locale-data/de-DE';
 import russianLocaleData from '@box/cldr-data/locale-data/ru-RU';
 import japaneseLocaleData from '@box/cldr-data/locale-data/ja-JP';
-import zoneinfo, { TimeZoneEntries } from '../zoneinfo';
+import timezones, { TimeZoneEntries } from '../timezones';
 
 const germanZoneData = germanLocaleData.timezones;
 const russianZoneData = russianLocaleData.timezones;
 const japaneseZoneData = japaneseLocaleData.timezones;
 
-describe('util/zoneinfo', () => {
+describe('util/timezones', () => {
     test('should work in English', () => {
-        const zones: TimeZoneEntries = zoneinfo(); // default is English
+        const zones: TimeZoneEntries = timezones(); // default is English
         expect(zones['1']).toStrictEqual({
             name: 'Africa/Abidjan',
             displayName: 'GMT+00:00 Africa/Abidjan GMT',
@@ -28,7 +28,7 @@ describe('util/zoneinfo', () => {
     });
 
     test('should work in German', () => {
-        const zones: TimeZoneEntries = zoneinfo({
+        const zones: TimeZoneEntries = timezones({
             tzData: germanZoneData,
         });
         expect(zones['295']).toStrictEqual({
@@ -44,7 +44,7 @@ describe('util/zoneinfo', () => {
     });
 
     test('should work in Japanese', () => {
-        const zones: TimeZoneEntries = zoneinfo({
+        const zones: TimeZoneEntries = timezones({
             tzData: japaneseZoneData,
         });
         expect(zones['321']).toStrictEqual({
@@ -60,7 +60,7 @@ describe('util/zoneinfo', () => {
     });
 
     test('should work in Russian', () => {
-        const zones: TimeZoneEntries = zoneinfo({
+        const zones: TimeZoneEntries = timezones({
             tzData: russianZoneData,
         });
         expect(zones['295']).toStrictEqual({

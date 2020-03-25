@@ -5,7 +5,7 @@
 
 import data, { TimeZone, TimeZoneList } from 'box-locale-data';
 
-const { timezones } = data;
+const { timezones: boxzones } = data;
 
 export interface TimeZoneOptions {
     tzData?: TimeZoneList;
@@ -15,14 +15,14 @@ export interface TimeZoneEntries {
     [id: string]: TimeZone;
 }
 
-function zoneinfo(options: TimeZoneOptions = {}): TimeZoneEntries {
+function timezones(options: TimeZoneOptions = {}): TimeZoneEntries {
     const zones: TimeZoneEntries = {};
 
     // used the passed in info first. If it is not there, fall back to
     // the one we loaded above from the 'box-locale-data' alias
     let { tzData }: { tzData?: TimeZoneList } = options;
     if (!tzData) {
-        tzData = timezones;
+        tzData = boxzones;
     }
 
     tzData.forEach(zone => {
@@ -32,4 +32,4 @@ function zoneinfo(options: TimeZoneOptions = {}): TimeZoneEntries {
     return zones;
 }
 
-export default zoneinfo;
+export default timezones;
